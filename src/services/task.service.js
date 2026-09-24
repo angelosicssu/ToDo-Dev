@@ -4,36 +4,20 @@ async function createTask(data) {
     return await taskRepository.createTask(data);
 }
 
-function getTasks() {
-    return tasks;
+async function getTasks() {
+    return await taskRepository.getTasks(); 
 }
 
-function getTaskById(id) {
-    const task = tasks.find(task => task.id === id);
-    return task;
+async function getTaskById(id) {
+    return await taskRepository.getTaskById(id);
 }
 
-function updateTask(id, data) {
-    const taskExist = tasks.findIndex(task => task.id === id);
-    if(taskExist === -1) {
-        return null;
-    }
-    const task = {
-        id: id,
-        ...data
-    }
-    tasks[taskExist] = task;
-    return task;
+async function updateTask(id, data) {
+    return await taskRepository.updateTask(id, data);
 }
 
-function deleteTask(id) {
-    const taskIndex = tasks.findIndex(task => task.id === id);
-    if(taskIndex === -1) {
-        return null;
-    }
-    const task = tasks[taskIndex];
-    tasks.splice(taskIndex, 1);
-    return task;
+async function deleteTask(id) {
+    return await taskRepository.deleteTask(id);
 }
 
 module.exports = {

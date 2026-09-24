@@ -1,7 +1,7 @@
 const taskService = require("../services/task.service");
 
-function getTasks(request, response) {
-    const tasks = taskService.getTasks();
+async function getTasks(request, response) {
+    const tasks = await taskService.getTasks();
     response.json(tasks);
 }
 
@@ -14,9 +14,9 @@ async function createTask(request, response) {
     });
 }
 
-function getTaskById(request, response) {
+async function getTaskById(request, response) {
     const id = Number(request.params.id);
-    const task = taskService.getTaskById(id);
+    const task = await taskService.getTaskById(id);
     if(!task) {
         return response.status(404).json({
             message: "Tarefa não encontrada"
@@ -25,10 +25,10 @@ function getTaskById(request, response) {
     response.json(task);
 }
 
-function updateTask(request, response) {
+async function updateTask(request, response) {
     const id = Number(request.params.id);
     const data = request.body;
-    const task = taskService.updateTask(id, data);
+    const task = await taskService.updateTask(id, data);
     if(!task) {
         return response.status(404).json({
             message: "Tarefa não encontrada"
@@ -40,9 +40,9 @@ function updateTask(request, response) {
     });
 }
 
-function deleteTask(request, response) {
+async function deleteTask(request, response) {
     const id = Number(request.params.id);
-    const task = taskService.deleteTask(id);
+    const task = await taskService.deleteTask(id);
     if(!task) {
         return response.status(404).json({
             message: "Tarefa não encontrada"

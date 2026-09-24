@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres
+    container_name: devtask-db
+    environment:
+      POSTGRES_USER: devtask
+      POSTGRES_PASSWORD: devtask123
+      POSTGRES_DB: devtask
+    ports:
+      - "5432:5432"
+    volumes:
+      - devtask-data:/var/lib/postgresql
+  
+  backend:
+    build: .
+    container_name: devtask-backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+
+volumes:
+  devtask-data:
